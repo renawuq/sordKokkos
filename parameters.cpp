@@ -173,7 +173,7 @@ void parameters::readPara(std::string filename)
             assignOneValue(line, dt);
         }
         else if(temp == "affine"){
-            std::cout << "affine: " << line << "\n";
+            // std::cout << "affine: " << line << "\n";
             assignDoubleArray(line, affine);
         }
         else if(temp == "n1expand"){
@@ -234,7 +234,7 @@ void parameters::readPara(std::string filename)
             assignOneValue(line, vpml);
         }
         else if(temp == "ihypo"){
-            std::cout << "ihypo " << line << "\n";
+            // std::cout << "ihypo " << line << "\n";
             assignOneArray(line, ihypo, 3);
         }
         else if(temp == "source"){
@@ -359,28 +359,12 @@ void parameters::readPara(std::string filename)
             assignOneValue(line, mpout);
         }
         else if(temp == "fieldio"){
-            // fieldlist.insertNode();
-            // gio->mode = xx
-            // bool switch1 = true; 
-            // while(switch1){
-            //     for(char&c : line){ 
-            //         if(c == ']')
-            //         {
-            //             switch1 = false;
-            //             break;
-            //         }
-            //         if(c== '=' || c =='+')
-            //         {
-
-            //         }
-            //     }
-            //     getline(infile, line);
             std::cout << line;
             bool switch1 = true; 
             while(switch1){
                 if(line[0] == ']')
                     {
-                        std::cout << "end when " << line << "\n";
+                        //std::cout << "end when " << line << "\n";
                         switch1 = false;
                         break;
                     }
@@ -414,7 +398,7 @@ void parameters::readPara(std::string filename)
 }
 void parameters::readFieldio(std::string line)
 {
-    std::cout<<"just checking: " << line << "\n";
+    // std::cout<<"just checking: " << line << "\n";
     int tempInt = 0; 
     tmp ="";
     for (int i = 2 ; i < 13; i++){
@@ -440,7 +424,7 @@ void parameters::readFieldio(std::string line)
         if(i == 4){
             line = line.substr(tfunc.length()+4);
             assignOneValue(line, period);
-            std::cout << period << "\n";
+            // std::cout << period << "\n";
         }
         tmp = "";
         bool keepAdd = true; 
@@ -499,13 +483,13 @@ void parameters::readFieldio(std::string line)
         if(i==7){
             line = line.substr(3);
             assignOneValue(line, nb);
-            std::cout << "nb: " << nb << "\n";
+            // std::cout << "nb: " << nb << "\n";
         }
         tempInt3 = 0;
         tmp = "";
         if(i == 8){
             line = line.substr(std::to_string(nb).length()+2);
-            std::cout << "i =8: " << line << "\n";
+            // std::cout << "i =8: " << line << "\n";
             for(char&c : line){
                 if(c == ']'){
                     tmp.erase(std::remove(tmp.begin(), tmp.end(), '['), tmp.end());
@@ -531,14 +515,14 @@ void parameters::readFieldio(std::string line)
             else{
                 assignStringValue(line, filename);
             }
-            std::cout << "filename is " << filename << "\n";
+            // std::cout << "filename is " << filename << "\n";
         }
 
         if(i == 10){
             line = line.substr(filename.length()+4);
             // std::cout << "i = 10: " << line << "\n";
             assignOneValue(line, val);
-            std::cout << "val is " << val << "\n";
+            // std::cout << "val is " << val << "\n";
         }
         tmp = "";
         if (i == 11){
@@ -555,10 +539,11 @@ void parameters::readFieldio(std::string line)
                     tmp+=c; 
             }
         }
-        std::cout << "field is: " << field << "\n";
+        // std::cout << "field is: " << field << "\n";
     }
-    std::cout << "mode is: " << mode << " nc is: " << nc << " tfunc is: " << tfunc << " period is: " << period << "\n";
+    // std::cout << "mode is: " << mode << " nc is: " << nc << " tfunc is: " << tfunc << " period is: " << period << "\n";
     fiel.insertNode(mode,nc,tfunc,period,x1,x2,nb,ii,filename,val, field);
+     
 }
 
 void parameters::assignOneValue(std::string line, int &num)
@@ -772,6 +757,19 @@ void parameters::printAll(){
         std::cout << "slipvector [" << i << "]: " << slipvector[i] << "\n";
         std::cout << "np3 [" << i << "]: " << np3[i] << "\n";
 
+    }
+    Node* temp = fiel.getHead();
+    while(temp!=nullptr){
+        tIo* tio = temp->data;
+        std::cout << "Mode: " << tio->mode << " "
+              << "nc: " << tio->nc << " "
+              << "tfunc: " << tio->tfunc << " "
+              << "period: " << tio->period << " " 
+              << "nb: " << tio->nb << " "
+              << "filename: " << tio->filename << " "
+              << "val: " << tio->val << " " 
+              << "field: " << tio->field << "\n";
+        temp = temp->next;
     }
 }
 
