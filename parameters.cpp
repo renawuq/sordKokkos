@@ -558,7 +558,7 @@ void parameters::readFieldio(std::string line)
         std::cout << "field is: " << field << "\n";
     }
     std::cout << "mode is: " << mode << " nc is: " << nc << " tfunc is: " << tfunc << " period is: " << period << "\n";
-    fiel.insertNode(mode,nc,tfunc,period,x1,x2,nb,ii,filename,val, field);
+    //fiel.insertNode(mode,nc,tfunc,period,x1,x2,nb,ii,filename,val, field);
 }
 
 void parameters::assignOneValue(std::string line, int &num)

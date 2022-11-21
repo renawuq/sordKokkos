@@ -3,13 +3,18 @@
 #include "fieldio.h"
 
 Fieldio::Fieldio() {
-    io0 = nullptr;
+    head = nullptr;
     // tail = nullptr;
 }
+Node* Fieldio::createNode(tIo* item){
+    Node*n = new Node;
+    n->data = item;
+    n->next = nullptr;
+}
 
-tIo* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int period, 
+Node* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int period, 
     float x1[3], float x2[3], int nb, float ii[4][3], std::string filename, int val, std::string field){
-        tIo* n = new tIo;
+        tIo* n;
         n->mode = mode;
         n->nc = nc;
         n->tfunc = tfunc;
@@ -27,7 +32,8 @@ tIo* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int period
         n->filename = filename;
         n->val = val;
         n->field = field;
-        return n; 
+        Node* node = createNode(n); 
+        return node; 
     }
 // void fieldio_list::insertNode(){
 //     t_io * newNode = new t_io();
@@ -37,9 +43,9 @@ tIo* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int period
 // }
 void Fieldio::insertNode(std::string mode, int nc, std::string tfunc, int period, 
     float x1[3], float x2[3], int nb, float ii[4][3], std::string filename, int val, std::string field){
-    tIo* item = createNode(mode, nc, tfunc, period, x1, x2, nb, ii, filename, val, field);
-    item -> next = io0;
-    io0 = item;
+    Node* item = createNode(mode, nc, tfunc, period, x1, x2, nb, ii, filename, val, field);
+    item -> next = head;
+    head = item;
 }
 
 #endif

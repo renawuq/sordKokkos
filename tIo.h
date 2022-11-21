@@ -1,6 +1,8 @@
 #ifndef TIO_H
 #define TIO_H
 #include <iostream>
+
+
 struct tIo
 {
     std::string mode, tfunc, filename, field;
@@ -9,6 +11,13 @@ struct tIo
     float x1[3];
     float x2[3];
     float ii[4][3];
-    tIo* next;
+    //tIo<T>* next;
+};
+
+struct Node
+{
+    tIo* data;
+    Node* prev;
+    Node* next;
 };
 #endif //TLO_H
