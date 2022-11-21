@@ -9,7 +9,7 @@
 #include "fieldio.h"
 class parameters{
 private:
-    fieldio fiel;  
+    Fieldio fiel;  
     std::string mode, filename, field; 
     int nc, nb;
     std::string tfunc;
@@ -66,5 +66,6 @@ public:
     void printAll();
 };
 
+#include "parameters.cpp"
 #endif // PARAMETER_H
 

@@ -1,14 +1,13 @@
+#ifndef FIELDIO_CPP
+#define FIELDIO_CPP
 #include "fieldio.h"
-#include "tIo.h"
-#include <algorithm>
-#include <vector>
-#include <iterator>
-// fieldio::fieldio() {
-//     io0 = nullptr;
-//     tail = nullptr;
-// }
 
-tIo* fieldio::createNode(std::string mode, int nc, std::string tfunc, int period, 
+Fieldio::Fieldio() {
+    io0 = nullptr;
+    // tail = nullptr;
+}
+
+tIo* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int period, 
     float x1[3], float x2[3], int nb, float ii[4][3], std::string filename, int val, std::string field){
         tIo* n = new tIo;
         n->mode = mode;
@@ -36,9 +35,11 @@ tIo* fieldio::createNode(std::string mode, int nc, std::string tfunc, int period
 //     gio = gio->next;
 //     gio->next = gio0; 
 // }
-void fieldio::insertNode(std::string mode, int nc, std::string tfunc, int period, 
+void Fieldio::insertNode(std::string mode, int nc, std::string tfunc, int period, 
     float x1[3], float x2[3], int nb, float ii[4][3], std::string filename, int val, std::string field){
-    tIo* item = fieldio::createNode(mode, nc, tfunc, period, x1, x2, nb, ii, filename, val, field);
+    tIo* item = createNode(mode, nc, tfunc, period, x1, x2, nb, ii, filename, val, field);
     item -> next = io0;
     io0 = item;
 }
+
+#endif

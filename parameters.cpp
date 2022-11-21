@@ -1,3 +1,5 @@
+#ifndef PARAMETER_CPP
+#define PARAMETER_CPP
 #include "parameters.h"
 
 parameters::parameters(){
@@ -772,3 +774,5 @@ void parameters::printAll(){
 
     }
 }
+
+#endif
