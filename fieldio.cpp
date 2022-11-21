@@ -7,9 +7,10 @@ Fieldio::Fieldio() {
     // tail = nullptr;
 }
 Node* Fieldio::createNode(tIo* item){
-    Node*n = new Node;
+    Node*n = new Node();
     n->data = item;
     n->next = nullptr;
+    return n;
 }
 
 Node* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int period, 
@@ -34,7 +35,7 @@ Node* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int perio
         n->field = field;
         Node* node = createNode(n); 
         return node; 
-    }
+}
 // void fieldio_list::insertNode(){
 //     t_io * newNode = new t_io();
 //     gio->next = newNode;
@@ -43,7 +44,8 @@ Node* Fieldio::createNode(std::string mode, int nc, std::string tfunc, int perio
 // }
 void Fieldio::insertNode(std::string mode, int nc, std::string tfunc, int period, 
     float x1[3], float x2[3], int nb, float ii[4][3], std::string filename, int val, std::string field){
-    Node* item = createNode(mode, nc, tfunc, period, x1, x2, nb, ii, filename, val, field);
+    Node* item = new Node();
+    item = createNode(mode, nc, tfunc, period, x1, x2, nb, ii, filename, val, field);
     item -> next = head;
     head = item;
 }
