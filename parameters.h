@@ -6,10 +6,10 @@
 #include <algorithm>
 #include <vector>
 #include <map>
-//#include "fieldio.h"
+#include "fieldio.h"
 class parameters{
 private:
-    //Fieldio<tIo> fiel;  
+    Fieldio fiel;  
     std::string mode, filename, field; 
     int nc, nb;
     std::string tfunc;
